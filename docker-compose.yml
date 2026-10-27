@@ -1,0 +1,26 @@
+﻿version: "3.8"
+
+services:
+  web:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - AWS_ACCESS_KEY_ID=AKIAZ4NRGGZUEKWF6RG3
+      - AWS_SECRET_ACCESS_KEY=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
+      - AWS_DEFAULT_REGION=us-east-2
+      - S3_BUCKET=app-uploads
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16
+    environment:
+      - POSTGRES_DB=appdb
+      - POSTGRES_USER=appuser
+      - POSTGRES_PASSWORD=pgpass2026
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+volumes:
+  dbdata:
